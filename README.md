@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- [Code Source](https://github.com/zougari47/quiz-app)
+- [Code Source](https://quiz-app5.netlify.app/)
 - [Live Demo](https://zougari47.github.io/quiz-app/)
 
 ## My process
