@@ -1,0 +1,45 @@
+@import 'var';
+
+.container {
+  border: 1px solid rgba(0, 0, 0, 0.144);
+  border-radius: 6px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.144);
+  max-width: 500px;
+  max-height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-family: 'Karla', sans-serif;
+  color: #293264;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-family: 'Karla', sans-serif;
+  font-weight: 500;
+}
+
+.btn {
+  min-width: 200px;
+  min-height: 40px;
+  cursor: pointer;
+  outline: none;
+  background: #4d5b9e;
+  color: #f5f7fb;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Karla', sans-serif;
+  font-size: 1.17rem;
+
+  &:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  }
+}

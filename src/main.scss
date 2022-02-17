@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: inherit;
+}
+
+// body {
+//   //   min-height: 100vh;
+//   //   //   width: 100vw;
+//   //   background: url(./main_background.svg) no-repeat;
+//   //   background-position: center bottom;
+//   //   background-size: cover;
+//   //   padding-top: 1rem;
+// }
+
+// #root {
+//   //   position: relative;
+//   color: #2932645d;
+// }
+
+#root::before {
+  content: '';
+  width: 100vw;
+  height: 100vh;
+  background: url(./main_background.svg) center/cover no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+// #root {
+//   background: url(./main_background.svg) no-repeat;
+//   background-position: center bottom;
+//   background-size: cover;
+// }
