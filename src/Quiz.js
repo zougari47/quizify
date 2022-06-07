@@ -7,16 +7,17 @@ export default function Quiz(props) {
   const [questionJSX, setQuestionJSX] = React.useState([]);
   const [resultHidden, setResultHidden] = React.useState(true);
   var parser = new DOMParser();
-  const correctAnswerArray = questions.map((obj) => parse(obj.correct_answer));
+  const correctAnswerArray = questions.map(obj => parse(obj.correct_answer));
 
   //Transform HTML symbol to real character (&amp; => & ...)
   function parse(str) {
+    const parser = new DOMParser();
     return parser.parseFromString(`<!doctype html><body>${str}`, 'text/html')
       .body.textContent;
   }
 
   React.useEffect(() => {
-    setQuestionJSX((p) => {
+    setQuestionJSX(p => {
       return questions.map((questionObj, index) => {
         //mix all answers in one array then sort them randomly
         const answers = [

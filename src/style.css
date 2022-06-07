@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[type='radio']:checked + label {
+  @apply bg-[#D6DBF5] border-[transparent];
+}
+.correct + label {
+  background-color: #94d7a2 !important;
+  border-color: transparent;
+  color: #293264;
+}
+
+.wrong + label {
+  background-color: #f8bcbc !important;
+  opacity: 0.5;
+}
+.not-selected + label {
+  opacity: 0.5;
+}
