@@ -4,7 +4,7 @@ import Questions from './components/Questions/Questions';
 
 const App = () => {
   // variables
-  const [isGameStarted, setIsGameStarted] = useState(true);
+  const [isGameStarted, setIsGameStarted] = useState(false);
   const API = useRef('https://opentdb.com/api.php?amount=5');
 
   // functions
