@@ -15,7 +15,6 @@ const App = () => {
     if (code == 'any') return;
     const URL = `https://opentdb.com/api.php?amount=5&category=${code}`;
     API.current = URL;
-    console.log(URL);
   };
 
   return (

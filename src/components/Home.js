@@ -2,7 +2,7 @@ import Categories from './Categories/Categories';
 
 const style = {
   container:
-    'w-full h-full max-w-[550px] max-h-[550px] bg-body absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] grid place-items-center',
+    'w-full h-full max-w-[550px] max-h-[550px] bg-body absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] grid place-items-center shadow',
   section: 'text-center',
   title: 'font-bold text-[31.25px] leading-[37px] text-blueStrong font-Karla',
   description:

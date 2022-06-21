@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Question from './Question';
 import Loader from './Loader';
 import Score from './Score';
@@ -15,6 +15,35 @@ const Questions = ({ api, restartGame }) => {
   ));
 
   // Functions
+  const checkAnswers = () => {
+    let SCORE = 0;
+    const selectorArr = questions.reduce((arr, obj) => {
+      return [
+        ...arr,
+        PARSER(obj.correct_answer + obj.question).replaceAll(/\W/gi, '')
+      ];
+    }, []);
+
+    selectorArr.forEach(val => {
+      // correct answer radio button
+      const rd = document.querySelector(`[value="${val}"]`);
+      const nameAttr = rd.getAttribute('name');
+      // wrong answers radio buttons
+      const rdButtons = document.querySelectorAll(
+        `[name="${nameAttr}"]:not([value="${val}"])`
+      );
+
+      rd.checked && SCORE++;
+      rd.classList.add('correct');
+      rdButtons.forEach(x =>
+        x.classList.add(x.checked ? 'wrong' : 'not-selected')
+      );
+    });
+    // update states
+    setScore(SCORE);
+    setIsResultShown(true);
+  };
+
   useEffect(() => {
     (async () => {
       const response = await fetch(api);
@@ -31,37 +60,9 @@ const Questions = ({ api, restartGame }) => {
 
         return qs;
       });
-
       setIsLoading(false);
     })();
   }, []);
-
-  const checkAnswers = () => {
-    questions.map((obj, index) => {
-      const CORRECT_ANSWERS = PARSER(obj.correct_answer);
-      const rdButtons = document
-        .querySelectorAll('.question')
-        [index].querySelectorAll('[type="radio"]');
-      // we loop over the radio buttons of every question 4
-      rdButtons.forEach(rd => {
-        if (rd.checked) {
-          rd.classList.add(rd.value === CORRECT_ANSWERS ? 'correct' : 'wrong');
-          rd.value === CORRECT_ANSWERS && setScore(score + 1);
-        } else {
-          rd.classList.add(
-            rd.value === CORRECT_ANSWERS ? 'correct' : 'not-selected'
-          );
-        }
-      });
-    });
-
-    // disabled all radio buttons
-    document
-      .querySelectorAll('[type="radio"]')
-      .forEach(rd => (rd.disabled = true));
-
-    setIsResultShown(true);
-  };
 
   return (
     <main className={style.main}>
@@ -83,7 +84,7 @@ const Questions = ({ api, restartGame }) => {
 
 const style = {
   main: 'flex justify-center items-center min-h-screen',
-  container: 'bg-body max-w-[550px] p-4',
+  container: 'bg-body max-w-[550px] p-4 shadow',
   btn: 'bg-blue text-body font-Inter text-base w-[193px] h-[52px] leading-[19.36px] rounded-[15px] duration-300 hover:rounded-tl-[0] hover:rounded-br-[0] hover:rounded-r[15px] hover:rounded-l-[15px] mt-4 block mx-auto'
 };
 

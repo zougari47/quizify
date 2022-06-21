@@ -1,7 +1,6 @@
 import Answer from './Answer';
 import { nanoid } from 'nanoid';
-
-const style = {};
+import PARSER from '../../functions/parser';
 
 const Answers = ({ obj }) => {
   const randomName = nanoid();
@@ -9,10 +8,11 @@ const Answers = ({ obj }) => {
     .sort((a, b) => 0.5 - Math.random())
     .map((answer, index) => (
       <Answer
-        key={index + 2}
+        key={index}
         _name={randomName}
         _id={nanoid()}
-        content={answer}
+        content={PARSER(answer)}
+        val={PARSER(answer + obj.question)}
       />
     ));
 

@@ -4,7 +4,7 @@ const listCategories = [];
 const DropDown = ({ _style, setQuery }) => {
   for (const category in categories) {
     listCategories.push(
-      <option value={categories[category].code}>
+      <option value={categories[category].code} key={category}>
         {categories[category].text}
       </option>
     );
