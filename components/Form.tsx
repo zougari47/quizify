@@ -13,16 +13,15 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import QuizIcon from '@mui/icons-material/Quiz'
 
 import type { IHomePageProps, IFormOptions } from '../interface'
-const Form: FC<IHomePageProps> = ({ categories, difficulty, types }) => {
+const Form: FC<IHomePageProps> = ({ categories, difficulties, types }) => {
   const router = useRouter()
   const [questionNumber, setQuestionNumber] = useState(5)
   const [options, setOptions] = useState({
     category: '0',
-    type: 'Any',
-    difficulty: 'Any'
+    type: 'any',
+    difficulty: 'any'
   })
 
   // function
@@ -47,8 +46,9 @@ const Form: FC<IHomePageProps> = ({ categories, difficulty, types }) => {
     setOptions(prevOptions => ({ ...prevOptions, [key]: value }))
   }
 
-  const handleBtnClick = (e: MouseEvent<HTMLElement>) => {
+  const handleSubmitEvent = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault()
+
     router.push(
       {
         pathname: '/quiz',
@@ -98,9 +98,9 @@ const Form: FC<IHomePageProps> = ({ categories, difficulty, types }) => {
           onChange={e => handleDropDownChange(e, 1)}
           value={options.type}
         >
-          {types.map(type => (
-            <MenuItem key={type} value={type}>
-              {type}
+          {types.map(t => (
+            <MenuItem key={t.id} value={t.id}>
+              {t.name}
             </MenuItem>
           ))}
         </Select>
@@ -115,9 +115,9 @@ const Form: FC<IHomePageProps> = ({ categories, difficulty, types }) => {
           onChange={e => handleDropDownChange(e, 2)}
           value={options.difficulty}
         >
-          {difficulty.map(dif => (
-            <MenuItem key={dif} value={dif}>
-              {dif}
+          {difficulties.map(dif => (
+            <MenuItem key={dif.id} value={dif.id}>
+              {dif.name}
             </MenuItem>
           ))}
         </Select>
@@ -129,7 +129,7 @@ const Form: FC<IHomePageProps> = ({ categories, difficulty, types }) => {
           type="submit"
           size="large"
           fullWidth
-          onClick={handleBtnClick}
+          onClick={handleSubmitEvent}
         >
           <Typography variant="h5">Start Quiz</Typography>
         </Button>

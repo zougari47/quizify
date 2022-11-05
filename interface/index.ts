@@ -1,18 +1,24 @@
-interface ICategory {
-  id: number
-  name: string
-}
-
-interface IDifficulty {}
-
+// ****** Pages ******
 interface IHomePageProps {
   categories: ICategory[]
-  difficulty: string[]
-  types: string[]
+  difficulties: IDifficulty[]
+  types: IAnswerType[]
 }
 
-interface IQuizPageInterface {
-  paramsReceivedSuccessfully: boolean
+interface IResultPageProps {
+  result: string
+}
+
+// ****** Component ******
+interface IQuestionComponentProps {
+  question: string
+  number: number
+  correctAnswer: string
+  falseAnswers: string[]
+  questionsCount: number
+  score: number
+  nextQuestion: () => void
+  updateScore: () => void
 }
 
 interface IFormOptions {
@@ -22,4 +28,20 @@ interface IFormOptions {
   difficulty: string
 }
 
-export type { ICategory, IHomePageProps, IFormOptions }
+// ****** API ******
+interface ICategory {
+  id: number | string
+  name: string
+}
+
+interface IAnswerType extends ICategory {}
+
+interface IDifficulty extends ICategory {}
+
+export type {
+  ICategory,
+  IHomePageProps,
+  IFormOptions,
+  IQuestionComponentProps,
+  IResultPageProps
+}

@@ -1,35 +1,35 @@
-'use client'
-
+import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useCallback, useMemo, useRef, useState } from 'react'
+
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
-import { Box, Button, Fade, Typography } from '@mui/material'
+import { Card, Box, Button, Fade, Typography } from '@mui/material'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import { Container } from '@mui/system'
 
-interface IQuestionComponentProps {
-  question: string
-  number: number
-  correctAnswer: string
-  falseAnswers: string[]
-}
+import type { IQuestionComponentProps } from '../../interface/'
 
 const Question: FC<IQuestionComponentProps> = ({
   question,
   number,
   correctAnswer,
-  falseAnswers
+  falseAnswers,
+  score,
+  questionsCount,
+  nextQuestion,
+  updateScore
 }) => {
   const [questionProps, setQuestionProps] = useState({
     selectedAnswer: '',
     hasAnswered: false
   })
   const randomNumber = useRef(Math.random())
-  console.log('Question has rerender', questionProps.selectedAnswer)
+  const router = useRouter()
 
+  // **** functions ****
   const handleChangeRadioBtn = (e: ChangeEvent<HTMLInputElement>) =>
     setQuestionProps(prevProps => ({
       ...prevProps,
@@ -43,23 +43,32 @@ const Question: FC<IQuestionComponentProps> = ({
     }
 
     if (questionProps.selectedAnswer === correctAnswer) {
-      console.log('True')
-    } else {
-      console.log('False')
+      updateScore() // + 1
     }
 
     setQuestionProps(prevProps => ({ ...prevProps, hasAnswered: true }))
   }
 
-  const handleNextClick = () => {}
+  const handleNextClick = () => {
+    // *TODO -  check if the current question is the last question
+    if (number === questionsCount) {
+      router.push(
+        {
+          pathname: '/result',
+          query: { result: `${score}/${questionsCount}` }
+        },
+        '/result'
+      )
+      return
+    }
+    nextQuestion()
+  }
 
   return (
     <Fade timeout={1000} in={true}>
       <Container>
-        <Box
-          borderRadius={1}
-          p={3}
-          boxShadow={`0 3px 6px rgba(0,0,0,0.2)`}
+        <Card
+          sx={{ paddingBlock: 3 }}
           // sx={theme => ({ boxShadow: theme. })}
         >
           <Typography
@@ -69,7 +78,7 @@ const Question: FC<IQuestionComponentProps> = ({
             mt={2}
             mb={3}
           >
-            Question {number}/5
+            Question {number}/{questionsCount}
           </Typography>
 
           <Typography
@@ -131,7 +140,7 @@ const Question: FC<IQuestionComponentProps> = ({
               Next
             </Button>
           </Box>
-        </Box>
+        </Card>
       </Container>
     </Fade>
   )
