@@ -62,7 +62,7 @@ const Form: FC<IHomePageProps> = ({ categories, difficulties, types }) => {
   return (
     <form method="post">
       <Card sx={{ p: 3 }}>
-        <Slide direction="up" in={true} mountOnEnter>
+        
           <Typography
             variant="h1"
             textTransform="capitalize"
@@ -73,7 +73,7 @@ const Form: FC<IHomePageProps> = ({ categories, difficulties, types }) => {
           >
             quizzical
           </Typography>
-        </Slide>
+ 
 
         <TextField
           id="question-number"
