@@ -20,11 +20,11 @@ const Question: FC<IQuestionComponentProps> = ({
   score,
   questionsCount,
   nextQuestion,
-  updateScore
+  updateScore,
 }) => {
   const [questionProps, setQuestionProps] = useState({
     selectedAnswer: '',
-    hasAnswered: false
+    hasAnswered: false,
   })
   const randomNumber = useRef(Math.random())
   const router = useRouter()
@@ -33,7 +33,7 @@ const Question: FC<IQuestionComponentProps> = ({
   const handleChangeRadioBtn = (e: ChangeEvent<HTMLInputElement>) =>
     setQuestionProps(prevProps => ({
       ...prevProps,
-      selectedAnswer: e.target.value
+      selectedAnswer: e.target.value,
     }))
 
   const handleSubmitClick = () => {
@@ -55,7 +55,7 @@ const Question: FC<IQuestionComponentProps> = ({
       router.push(
         {
           pathname: '/result',
-          query: { result: `${score}/${questionsCount}` }
+          query: { result: `${score}/${questionsCount}` },
         },
         '/result'
       )
@@ -65,7 +65,7 @@ const Question: FC<IQuestionComponentProps> = ({
   }
 
   return (
-    <Fade timeout={1000} in={true}>
+    <Fade timeout={1500} in={true}>
       <Container>
         <Card
           sx={{ paddingBlock: 3 }}
@@ -96,7 +96,7 @@ const Question: FC<IQuestionComponentProps> = ({
               aria-labelledby="answers"
               name="answers"
               sx={{
-                justifyContent: 'space-around'
+                justifyContent: 'space-around',
               }}
               value={questionProps.selectedAnswer}
               onChange={handleChangeRadioBtn}
