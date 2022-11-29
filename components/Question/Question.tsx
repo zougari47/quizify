@@ -1,15 +1,13 @@
 import { useRouter } from 'next/router'
 import { ChangeEvent, FC, useCallback, useMemo, useRef, useState } from 'react'
-
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
-import { Card, Box, Button, Fade, Typography } from '@mui/material'
+import { Box, Button, Card, Fade, Typography } from '@mui/material'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import { Container } from '@mui/system'
-
 import type { IQuestionComponentProps } from '../../interface/'
 
 const Question: FC<IQuestionComponentProps> = ({
@@ -21,10 +19,11 @@ const Question: FC<IQuestionComponentProps> = ({
   questionsCount,
   nextQuestion,
   updateScore,
+  showLoader
 }) => {
   const [questionProps, setQuestionProps] = useState({
     selectedAnswer: '',
-    hasAnswered: false,
+    hasAnswered: false
   })
   const randomNumber = useRef(Math.random())
   const router = useRouter()
@@ -33,7 +32,7 @@ const Question: FC<IQuestionComponentProps> = ({
   const handleChangeRadioBtn = (e: ChangeEvent<HTMLInputElement>) =>
     setQuestionProps(prevProps => ({
       ...prevProps,
-      selectedAnswer: e.target.value,
+      selectedAnswer: e.target.value
     }))
 
   const handleSubmitClick = () => {
@@ -50,12 +49,12 @@ const Question: FC<IQuestionComponentProps> = ({
   }
 
   const handleNextClick = () => {
-    // *TODO -  check if the current question is the last question
     if (number === questionsCount) {
+      showLoader()
       router.push(
         {
           pathname: '/result',
-          query: { result: `${score}/${questionsCount}` },
+          query: { result: `${score}/${questionsCount}` }
         },
         '/result'
       )
@@ -96,7 +95,7 @@ const Question: FC<IQuestionComponentProps> = ({
               aria-labelledby="answers"
               name="answers"
               sx={{
-                justifyContent: 'space-around',
+                justifyContent: 'space-around'
               }}
               value={questionProps.selectedAnswer}
               onChange={handleChangeRadioBtn}

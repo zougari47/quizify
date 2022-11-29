@@ -1,29 +1,34 @@
 import { useRouter } from 'next/router'
 import { ChangeEvent, FC, MouseEvent, useState } from 'react'
 import {
-  Box,
   Button,
-  Container,
   FormControl,
-  Grid,
-  Slide,
   Card,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material'
-
 import type { IHomePageProps, IFormOptions } from '../interface'
-const Form: FC<IHomePageProps> = ({ categories, difficulties, types }) => {
+
+interface IFormComponentProps extends IHomePageProps {
+  showLoader: () => void
+}
+
+const Form: FC<IFormComponentProps> = ({
+  categories,
+  difficulties,
+  types,
+  showLoader
+}) => {
   const router = useRouter()
   const [questionNumber, setQuestionNumber] = useState(5)
   const [options, setOptions] = useState({
     category: '0',
     type: 'any',
-    difficulty: 'any',
+    difficulty: 'any'
   })
 
   // function
@@ -50,11 +55,12 @@ const Form: FC<IHomePageProps> = ({ categories, difficulties, types }) => {
 
   const handleSubmitEvent = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault()
+    showLoader()
 
     router.push(
       {
         pathname: '/quiz',
-        query: { questionNumber, ...options },
+        query: { questionNumber, ...options }
       },
       '/quiz'
     )
@@ -62,18 +68,16 @@ const Form: FC<IHomePageProps> = ({ categories, difficulties, types }) => {
   return (
     <form method="post">
       <Card sx={{ p: 3 }}>
-        
-          <Typography
-            variant="h1"
-            textTransform="capitalize"
-            textAlign="center"
-            fontStyle="italic"
-            color="primary"
-            gutterBottom
-          >
-            quizzical
-          </Typography>
- 
+        <Typography
+          variant="h1"
+          textTransform="capitalize"
+          textAlign="center"
+          fontStyle="italic"
+          color="primary"
+          gutterBottom
+        >
+          quizzical
+        </Typography>
 
         <TextField
           id="question-number"

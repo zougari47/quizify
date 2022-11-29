@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { decode } from 'html-entities'
 import { GetServerSideProps, NextPage } from 'next'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
+import Loader from '../../components/Loader'
 import Question from '../../components/Question/Question'
 
 interface IQuizPageProps {
@@ -10,6 +10,7 @@ interface IQuizPageProps {
 }
 
 const QuizPage: NextPage<IQuizPageProps> = ({ questionsList }) => {
+  const [loading, setLoading] = useState(false)
   const [gameScore, setGameScore] = useState(0)
   const [currentQuestionIndex, SetCurrentQuestionIndex] = useState(1)
   const questionsCount = questionsList?.length ?? 0
@@ -35,7 +36,9 @@ const QuizPage: NextPage<IQuizPageProps> = ({ questionsList }) => {
         questionsCount={questionsCount}
         score={gameScore}
         updateScore={updateScore}
+        showLoader={() => setLoading(true)}
       />
+      <Loader loading={loading} />
     </>
   )
 }
