@@ -9,26 +9,45 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-  Typography
+  Typography,
+  keyframes,
+  css,
 } from '@mui/material'
 import type { IHomePageProps, IFormOptions } from '../interface'
+import styled from '@emotion/styled'
 
 interface IFormComponentProps extends IHomePageProps {
   showLoader: () => void
 }
 
+const animate = keyframes`
+0%{
+  background-position: 0%;
+}
+100%{
+  background-position: 400%;
+}
+`
+const animation = css`
+  animation: ${animate} 3s linear infinite;
+`
+
+// const H1 = styled
+
+// const
+
 const Form: FC<IFormComponentProps> = ({
   categories,
   difficulties,
   types,
-  showLoader
+  showLoader,
 }) => {
   const router = useRouter()
   const [questionNumber, setQuestionNumber] = useState(5)
   const [options, setOptions] = useState({
     category: '0',
     type: 'any',
-    difficulty: 'any'
+    difficulty: 'any',
   })
 
   // function
@@ -60,7 +79,7 @@ const Form: FC<IFormComponentProps> = ({
     router.push(
       {
         pathname: '/quiz',
-        query: { questionNumber, ...options }
+        query: { questionNumber, ...options },
       },
       '/quiz'
     )
@@ -75,6 +94,15 @@ const Form: FC<IFormComponentProps> = ({
           fontStyle="italic"
           color="primary"
           gutterBottom
+          sx={{
+            fontSize: 150,
+            background:
+              '-webkit-linear-gradient(45deg , #2196f3 , #4dabf5 , #1769aa)',
+            // backgroundClip: 'text',
+            // WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            animation: `${animate} 1s linear infinite`,
+          }}
         >
           quizzical
         </Typography>
@@ -87,9 +115,6 @@ const Form: FC<IFormComponentProps> = ({
           onChange={handleQuestionsNumberChange}
           value={questionNumber}
           margin="normal"
-          // error
-          // helperText="Please enter a number between 1 and 50"
-          // variant="filled"
         />
 
         <FormControl fullWidth margin="normal">
