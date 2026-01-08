@@ -23,12 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang='en' className='dark'>
+      <body className={`${geistSans.variable} font-sans antialiased`}>
         {children}
-        <div className='absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]'></div>
+        <div className='absolute inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(var(--muted)_1px,transparent_1px)] [background-size:16px_16px]'></div>
       </body>
     </html>
   );
