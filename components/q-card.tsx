@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from './ui/badge';
+import { cn } from '@/lib/utils';
 
 type QuestionCardProps = {
   q: string;
@@ -59,9 +60,11 @@ export function QuestionCard({
           <Button
             variant='outline'
             size='lg'
-            className={`text-lg whitespace-normal min-h-10 !h-auto 
-            ${locked && ans === correct_answer && 'disabled:opacity-100 text-emerald-800 bg-emerald-100'}
-            ${locked && ans === selected && ans !== correct_answer && 'disabled:opacity-100 text-rose-800 bg-rose-100'}`}
+            className={cn(
+              'text-lg whitespace-normal min-h-10 !h-auto',
+              locked && ans === correct_answer && 'disabled:opacity-100 text-emerald-800 bg-emerald-100',
+              locked && ans === selected && ans !== correct_answer && 'disabled:opacity-100 text-rose-800 bg-rose-100'
+            )}
             key={ans}
             disabled={locked}
             onClick={() => {
